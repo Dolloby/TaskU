@@ -5,6 +5,7 @@ const cors= require('cors');
 const app = express();
 const sequelize = require('./config/database');
 const userRoutes = require('./routes/userRoutes');
+const taskRoutes = require('./routes/taskRoutes');
  
 app.use(
     cors({
@@ -19,6 +20,10 @@ app.use(express.json());
 sequelize.sync();
  
 // Rutas
+
+//Ruta User
 app.use('/api/user', userRoutes);
+//Ruta Task
+app.use('/api/task', taskRoutes);
 
 module.exports = app;
