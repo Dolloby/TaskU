@@ -9,7 +9,7 @@ router.post('/login', userController.login);
 // el uso de middleware.
 router.get('/profile', authMiddleware, userController.getUser);
 router.post('/change-password', authMiddleware, userController.changePassword);
-router.put('/update-profile', authMiddleware, userController);
+router.put('/update-profile', authMiddleware, userController.updateProfile);
     
 module.exports = router;
 

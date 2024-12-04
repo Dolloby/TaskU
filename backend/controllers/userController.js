@@ -5,11 +5,12 @@ const User = require('../models/user');
 
 // Registro de usuario
 exports.register = async (req, res) => {
-    const { name, mail, pass, phone, address} = req.body;
+    const { name, lastname, mail, pass, phone, address} = req.body;
     try {
     const hashedClave = await bcrypt.hash(pass, 10);
     const user = await User.create({
         name,
+        lastname,
         mail,
         pass: hashedClave,
         phone,
@@ -17,7 +18,7 @@ exports.register = async (req, res) => {
     });
     res.status(201).json({ message: 'Usuario registrado exitosamente' });
     } catch (error) {
-        res.status(500).json({ error: 'Error al registrar usuario ' + error });
+        res.status(500).json({ error: 'Error al registrar usuario'});
     }
 };
 
@@ -26,7 +27,7 @@ exports.login = async (req, res) => {
     const { mail, pass } = req.body;
     try {
         const user = await User.findOne({ where: { mail } });
-        if (!user || !(await bcrypt.compare(clave, user.pass))) {
+        if (!user || !(await bcrypt.compare(pass, user.pass))) {
         return res.status(401).json({ error: 'Credenciales incorrectas' });
         }
         const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, { expiresIn: '1h' });
@@ -63,11 +64,13 @@ exports.changePassword = async (req, res) => {
 };
 
 exports.updateProfile = async (req, res) => {
-    const { name, mail, phone, address} = req.body;
+    const { name, lastname, mail, phone, address} = req.body;
     try {
-    const hashedPass = await bcrypt.hash(pass, 10);
-    const user = await User.update({
+    //const hashedPass = await bcrypt.hash(pass, 10);
+    const user = await User.findByPk(req.userId);
+    await user.update({
         name,
+        lastname,
         mail,
         phone,
         address

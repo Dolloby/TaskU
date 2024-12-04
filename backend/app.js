@@ -4,7 +4,7 @@ const express = require('express');
 const cors= require('cors');
 const app = express();
 const sequelize = require('./config/database');
-const userRoutes = require('./backend/routes/userRoutes');
+const userRoutes = require('./routes/userRoutes');
  
 app.use(
     cors({
