@@ -2,20 +2,24 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Task = require('../models/task');
+const dayjs = require('dayjs')
 
 // Creación de tarea
-exports.add = async (req, res) => {
-    const { title, description, creationDate, expirationDate, priority, statusTask} = req.body;
+exports.addTask = async (req, res) => {
+    const { title, description, priority, statusTask} = req.body;
     try {
-    const task = await Task.create({
-        title,
-        description,
-        creationDate,
-        expirationDate,
-        priority,
-        statusTask
-    });
-    res.status(201).json({ message: 'Tarea creada exitosamente.' });
+        const creationDate = dayjs().format('YYYY-MM-DD HH:mm:ss');
+        const expirationDate = dayjs().add(30, 'day').format('YYYY-MM-DD HH:mm:ss'); // Añade un mes a la fecha de creación para expiración de la tarea
+
+        const task = await Task.create({
+            title,
+            description,
+            creationDate,
+            expirationDate,
+            priority,
+            statusTask
+        });
+        res.status(201).json({ message: 'Tarea creada exitosamente.' });
     } catch (error) {
         res.status(500).json({ error: 'Error de creación de tarea.' + error});
     }
@@ -37,9 +41,9 @@ exports.add = async (req, res) => {
 // };
 
 // Obtener datos de la tarea
-exports.getTask = async (req, res) => {
+exports.filterTask = async (req, res) => {
     try {
-        const task = await Task.findByPk(req.taskId);
+        const task = await Task.findAll({where: {statusTask: 'In Progress'}});
         if (!task) return res.status(404).json({ error: 'Tarea no encontrada' });
         res.json(task);
     } catch (error) {

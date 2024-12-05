@@ -1,0 +1,78 @@
+/* Contenedor principal */
+.edit-profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+  }
+  
+  /* Título */
+  .edit-profile h1 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  /* Mensaje de error */
+  .error-message {
+    color: #ff4d4f;
+    margin-bottom: 20px;
+  }
+  
+  /* Formulario de edici&oacute;n */
+  .edit-form {
+    background: #fff;
+    padding: 20px 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+  }
+  
+  /* Estilo de las etiquetas */
+  .edit-form label {
+    display: block;
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 10px;
+    font-weight: bold;
+  }
+  
+  /* Estilo de los inputs */
+  .edit-form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    color: #333;
+    transition: border 0.3s ease;
+  }
+  
+  .edit-form input:focus {
+    border: 1px solid #ff69b4; /* Color de enfoque */
+    outline: none;
+  }
+  
+  /* Bot&oacute;n de guardar cambios */
+  .edit-form button {
+    width: 100%;
+    padding: 10px 15px;
+    background-color: #ff69b4; /* Rosa */
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .edit-form button:hover {
+    background-color: #ff4081; /* Rosa m&aacute;s oscuro */
+  }
+  

@@ -1,0 +1,133 @@
+    .kanban-board {
+        display: flex;
+        gap: 16px;
+        padding: 20px;
+        background-color: #f4f4f4;
+    }
+    
+    .kanban-column {
+        flex: 1;
+        background-color: #ffffff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 16px;
+    }
+    
+    .kanban-column h3 {
+        font-size: 1.2rem;
+        margin-bottom: 16px;
+        color: #333;
+    }
+    
+    .kanban-card {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border-radius: 0.75rem;
+        background-color: white;
+        width: 150px;
+        height: 170px;
+        box-shadow: 0 4px 6px -1px rgba(0,0,0,.1),
+        0 2px 4px -2px rgba(0,0,0,.1);
+    }
+    
+    .kanban-title {
+        color: rgb(38 50 56);
+        letter-spacing: 0;
+        line-height: 1.375;
+        font-weight: 600;
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .kanban-info {
+        border: none;
+        padding: 1.5rem;
+        text-align: center;
+    }
+    
+    .kanban-footer {
+        padding: 0.75rem;
+        border: 1px solid rgb(236 239 241);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: rgba(0, 140, 255, 0.082);
+    }
+    
+    .kanban-tag {
+        display: inline-block;
+        background-color: #007bff;
+        color: #fff;
+        font-size: 0.75rem;
+        padding: 2px 8px;
+        border-radius: 4px;
+        margin-bottom: 8px;
+        font-weight: 300;
+        display: block;
+    }
+    
+    .kanban-action {
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+        border: none;
+        outline: none;
+        box-shadow: 0 4px 6px -1px rgba(33,150,243,.4),0 2px 4px -2px rgba(33,150,243,.4);
+        color: rgb(255 255 255);
+        text-transform: uppercase;
+        font-weight: 700;
+        font-size: .75rem;
+        padding: 0.75rem 1.5rem;
+        background-color: rgb(33 150 243);
+        border-radius: 0.5rem;
+    }
+    
+    .add-card-button {
+        background-color: #007bff;
+        color: white;
+        padding: 8px 12px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 0.9rem;
+    }
+    
+    .add-card-button:hover {
+        background-color: #0056b3;
+    }
+
+    .progress-loader {
+        top: 50%;
+        left: 50%;
+        position: absolute;
+        transform: translate(-50%, -50%);
+        width: 150px;
+        background: rgba(236, 236, 238, 0.253);
+        height: 10px;
+        border-radius: 7px;
+        overflow: hidden;
+    }
+    
+    .progress {
+    width: 1px;
+    height: 10px;
+    border-radius: 7px;
+    background: rgb(255, 255, 255);
+    transition: 0.5s;
+    animation: loading_44 5s cubic-bezier(0.4, 1.01, 1, 1) infinite;
+    }
+    
+    @keyframes loading_44 {
+    0% {
+        width: 0%;
+    }
+    
+    50% {
+        width: 100%;
+    }
+    
+    100% {
+        width: 0%;
+    }
+    }
