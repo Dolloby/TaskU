@@ -2,6 +2,7 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user');
+const nodemailer = require('nodemailer');
 
 // Registro de usuario
 exports.register = async (req, res) => {
@@ -56,10 +57,10 @@ exports.changePassword = async (req, res) => {
             return res.status(401).json({ error: 'Credenciales incorrectas' });
         }
         const hashedNewPass = await bcrypt.hash(newPass, 10);
-        await user.update({ clave: hashedNewPass });
-        res.json({ message: 'Contraseña cambiada exitosamente' });
+        await user.update({ pass: hashedNewPass });
+        res.json({ message: 'Contrase\u00F1a cambiada exitosamente' });
         } catch (error) {
-        res.status(500).json({ error: 'Error al cambiar contraseña' });
+        res.status(500).json({ error: 'Error al cambiar contrase\u00F1a' });
     }
 };
 
@@ -77,6 +78,47 @@ exports.updateProfile = async (req, res) => {
     });
     res.status(201).json({ message: 'Usuario actualizado exitosamente' });
     } catch (error) {
-        res.status(500).json({ error: 'Error al actualizar usuario ' + error });
+        res.status(500).json({ error: 'Error al actualizar usuario' });
+    }
+
+};
+exports.forgotPassword = async (req, res) => {
+    const { mail } = req.body;
+    try {
+        const user = await User.findOne({ where: {mail} });
+        if (!user) return res.status(404).json({ error: 'Email no se encuentra registrado en el sistema' });
+        const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, { expiresIn: '30m' });
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: process.env.EMAIL_USER,
+                pass: process.env.EMAIL_PASS,
+            },
+        });
+    
+        await transporter.sendMail({
+            from: process.env.EMAIL_USER,
+            to: mail,
+            subject: 'Recuperaci\xF3n de Contrase\xF1a',
+            text: `Ha solicitado la recuperaci\xF3n de su cuenta en TaskU!. </ br> Use este enlace para restablecer la contrase\xF1a: http://localhost:3015/api/users/reset-password/${token}`,
+        });
+    
+        res.json({ message: 'Correo de recuperaci\u00F3n enviado' });
+    } catch (error) {
+        res.status(500).json({ error: 'Error al env\u00EDar el correo ' + error.message });
     }
 };
+
+exports.resetPasswordFrontend = async (req, res) => {
+    const {  newPassword, token } = req.body;
+    try {
+    const decoded = jwt.verify(token, process.env.SECRET_KEY);
+    console.log(decoded)
+    const user = await User.findByPk(decoded.id);
+    user.pass = await bcrypt.hash(newPassword, 10);
+    await user.save();
+    res.json({ message: 'Contrase\u00F1a restablecida' });
+    } catch (error) {
+    res.status(400).json({ message: 'Token inv\u00E1lido o expirado' + error.message});
+    }
+} 

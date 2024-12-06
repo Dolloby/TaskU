@@ -3,23 +3,26 @@ import axios from "axios";
 import {useNavigate} from "react-router-dom";
 import '../css/profile.css';
 import apiRoutes from "./apiRoutes";
+import { Button, Modal } from "react-bootstrap";
+import ChangePassword from "./changePassword";
+import UpdateProfile from "./editProfile";
 // import Sidebar from "./sidebar";
 
 const Profile = () => {
+    const [showChangePassword, setShowChangePassword] = useState(false);
+    const [showUpdateProfile, setShowUpdateProfile] = useState(false);
     const [errores, setErrores] = useState('');
     const [user, setUser] = useState(null);
     const navegar = useNavigate();
+    const dashboard = () => {
+        localStorage.clear();
+        navegar("/dashboard"); 
+    }
     const logout = () => {
         localStorage.clear();
         navegar("/"); 
     }
-    const changePassword = () => {
-        navegar("/change-password"); // Ruta para el componente de edici&oacute;n
-    };
 
-    const editProfile = () => {
-        navegar("/edit-profile"); // Ruta para el componente de edici&oacute;n
-    };
     useEffect(
         () => {
             getProfile();
@@ -44,60 +47,89 @@ const Profile = () => {
     };
     
     return (
-        <div className="profile-page">
-            <div className="profile-container">
-                <div className="profile-sidebar">
-                    <h3>AppPedidos</h3>
-                    <ul>
-                        <li><a href="/dashboard">Dashboard</a></li>
-                        <li><a href="/profile">Perfil</a></li>
-                        <li><a href="/orders">Pedidos</a></li>
-                        <li><a href="/board">Tablero</a></li>
-                        <li><a href="/dashboard" onClick={logout}>Salir</a></li>
-                    </ul>
+        <div className="profile-container">
+            <header className="profile-header">
+                <div className="profile-logo">TaskU!</div>
+                {/* <div className="search-bar">
+                    <input type="text" autocomplete="off" name="text" className="input" placeholder="Buscar Tareas"></input>
+                </div> */}
+                <div className="profile-group">
+                    <svg viewBox="0 0 24 24" aria-hidden="true" classname="icon">
+                        <g>
+                        <path
+                            d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"
+                        ></path>
+                        </g>
+                    </svg>
+                    <input className="profile-input" type="search" placeholder="Search" />
                 </div>
-                {/* <Sidebar/> */}
-                <div className="profile-content">
-                    {errores && <p className="error-message">{errores}</p>}
-                    {user && (
+                <nav className="nav">
+                    <a href="/dashbord"className='link' onClick={dashboard}>Tablero</a>
+                    <a href="/profile" className='link'>Mi Perfil</a>
+                    <a href="/" className='link' onClick={logout}>Salir</a>
+                </nav>
+            </header>
+            <div className="profile-modals">
+                {/* Modal para cambiar contraseña */}
+                <Modal size="sm" show={showChangePassword} onHide={() => setShowChangePassword(false)} centered>
+                    <Modal.Body>
+                        <div className="modal-centered">
+                            <ChangePassword onClose={() => setShowChangePassword(false)} />
+                        </div>
+                    </Modal.Body>
+                </Modal>
+                {/* Modal para actualizar perfil */}
+                <Modal size="sm" show={showUpdateProfile} onHide={() => setShowUpdateProfile(false)} centered>
+                    <Modal.Body>
+                        <div className="modal-centered">
+                            <UpdateProfile onClose={() => setShowUpdateProfile(false)} />
+                        </div>
+                    </Modal.Body>
+                </Modal>
+            </div>
+            <div className="profile-content">
+                {errores && <p className="error-message">{errores}</p>}
+                {user && (
                     <div className="profile-info">
-                        <div className="section">
-                            <h2>Informaci&oacute;n de Usuario</h2>
-                            <div className="info-row">
-                                <span>Nombre</span>
-                                <p>{user.nombre}</p>
+                        <div className="profile-main">
+                            <div className="profile-section">
+                                <h2>Informaci&oacute;n de Usuario</h2>
+                                <div className="profile-info-row">
+                                    <span>Nombre</span>
+                                    <p>{user.name}</p>
+                                </div>
+                                <div className="profile-info-row">
+                                    <span>Apellido</span>
+                                    <p>{user.lastname}</p>
+                                </div>
+                                <div className="profile-info-row">
+                                    <span>Correo</span>
+                                    <p>{user.mail}</p>
+                                </div>
+                                <div className="profile-info-row">
+                                    <span>Tel&eacute;fono</span>
+                                    <p>{user.phone}</p>
+                                </div>
+                                <div className="profile-info-row">
+                                    <span>Direcci&oacute;n</span>
+                                    <p>{user.address}</p>
+                                </div>
                             </div>
-                            <div className="info-row">
-                                <span>Correo</span>
-                                <p>{user.correo}</p>
-                            </div>
-                            <div className="info-row">
-                                <span>Telefono</span>
-                                <p>{user.telefono}</p>
-                            </div>
-                            <div className="info-row">
-                                <span>Direccion</span>
-                                <p>{user.direccion}</p>
-                            </div>
-                            <button variant="outline-dark" size="sm" onClick={editProfile}>Actualizar Datos</button>
                         </div>
-
-                        <div className="section">
-                        <h2>Informaci&oacute;n de cuenta</h2>
-                        <div className="info-row">
-                            <span>Usuario</span>
-                            <p>{user.email}</p>
-                        </div>
-                        <div className="info-row">
-                            <span>Contrase&ntilde;a</span>
-                            <p>********</p>
-                        </div>
-                        <button variant="outline-dark" size="sm" onClick={changePassword}>Cambiar Contrase&ntilde;a</button>
+                        <div className="profile-image">
                         </div>
                     </div>
-                    )}
+                )}
+                <div className="profile-buttons">
+                    <div className="profile-actions">
+                        <Button className="me-2" onClick={() => setShowChangePassword(true)}>
+                            Cambiar Contrase&ntilde;a
+                        </Button>
+                        <Button className="me-2" onClick={() => setShowUpdateProfile(true)}>
+                            Actualizar Perfil
+                        </Button>
+                    </div>
                 </div>
-
             </div>
         </div>
     );

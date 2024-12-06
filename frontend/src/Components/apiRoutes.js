@@ -5,7 +5,7 @@ const apiRoutes = {
     register: `${BASE_URL_API}user/register`,
     changePassword: `${BASE_URL_API}user/change-password`,
     logout: `${BASE_URL_API}user/logout`,
-    recovery: `${BASE_URL_API}user/recovery`,
+    forgotPassword: `${BASE_URL_API}user/forgot-password`,
 };
 
 export default apiRoutes;

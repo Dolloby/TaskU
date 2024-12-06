@@ -4,14 +4,11 @@ import apiRoutes from './apiRoutes';
 import '../css/login.css';
 import {useNavigate} from "react-router-dom";
 import { useForm } from "react-hook-form";
-// import Alert from 'react-bootstrap/Alert';
 
-// Componente para iniciar sesi&oacute;n en la app
+// Componente para iniciar sesión en la app
 function Login() {
     const { register, handleSubmit, formState: { errors } } = useForm();
-    // const onSubmit = event => console.log(event);
-    // const [email, setEmail] = useState('');
-    // const [password, setPassword] = useState('');
+
     const [errores, setErrores] = useState('');
     const navegar = useNavigate();
 
@@ -25,7 +22,7 @@ function Login() {
         });
         console.log(res);
         if(res.status === 401){
-            setErrores('Acceso denegado, intentar nuevamente' + errores);
+            setErrores('Acceso denegado, intentar nuevamente');
         }else{
             localStorage.setItem('access_token', res.data.token)
             navegar("/dashboard");
@@ -76,7 +73,7 @@ function Login() {
                             {...register("password", {
                                 required: {
                                         value: true,
-                                        message: "El campo contrase&ntilde;a es requerido"
+                                        message: "El campo contrase\xF1a es requerido"
                                     },
                                     minLength: {
                                         value: 6,
