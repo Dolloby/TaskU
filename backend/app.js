@@ -9,7 +9,8 @@ const taskRoutes = require('./routes/taskRoutes');
  
 app.use(
     cors({
-        origin:['http://localhost:3014'],
+        // origin:['http://localhost:3014'],
+        origin:['https://task-u.vercel.app'],
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
         credentials: true,
     })
