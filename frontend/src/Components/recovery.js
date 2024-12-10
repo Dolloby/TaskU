@@ -4,7 +4,6 @@ import { useState } from "react";
 import '../css/recovery.css';
 import apiRoutes from "./apiRoutes";
 import axios from "axios";
-import { ToastContainer, toast } from 'react-toastify';
 
 const Recovery = () => {
   const navigate = useNavigate();
@@ -14,46 +13,49 @@ const Recovery = () => {
   const [mail, setMail] = useState("");
   const [errores, setErrores] = useState("");
 
-  const validarDatos = async () => {
+  const validarDatos = async (e) => {
+    e.preventDefault(); // Prevenir la acción por defecto del formulario
     setErrores("");
+  
+    // Validación: Si el correo está vacío, se muestra el error y no se hace la solicitud
+    if (!mail) {
+      setErrores("Por favor, ingresa tu correo.");
+      return; // Salir de la función para evitar hacer la solicitud
+    }
+  
     try {
       const res = await axios.post(apiRoutes.forgotPassword, {
-        "mail": mail
+        mail: mail
       });
-      if (!mail) {
-        setErrores("Por favor, ingresa tu email.");
-      }
-      if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(mail)) {
-        setErrores("Por favor, ingresa un email válido.");
-      }
-      if(res.status === 404){
+  
+      // Si el correo no se encuentra en la base de datos
+      if (res.status === 404) {
         setErrores('Email no se encuentra registrado en el sistema');
-        toast.error('Hubo un error al procesar la solicitud');
-      } else{
-        toast.success( 'Hotel actualizado con Ã©xito');
-        setTimeout(() =>
-        {
-          navigate("/");
-        }, 1500);
+        alert('Hubo un error al procesar la solicitud');
+      } else {
+        // Si la solicitud es exitosa, muestra el mensaje y redirige
+        alert("Correo enviado. Revisa tu bandeja de entrada para continuar.");
+        setTimeout(() => {
+          navigate("/"); // Redirigir a la página principal (login)
+        }, 500); // 1.5 segundos de espera antes de redirigir
+      }
+    } catch (error) {
+      setErrores('Error al procesar la solicitud. Intenta nuevamente.');
+      console.error(error);
     }
-
-    }
-    catch (error) {
-        setErrores('Error al registrar Usuario, intentar nuevamente' + error);
-    }
-  }
+  };
 
   return (
     <div className="recovery-container">
       <div className="logo-container">
         {errores && <p className="error-message">{errores}</p>}
-        Contrase&ntilde;a Olvidada
+        
       </div>
-      <ToastContainer />
 
+      <h2>Contrase&ntilde;a Olvidada</h2>
       <form className="recovery">
         <div className="recovery-group">
-          <label for="email">Correo</label>
+          <label>Correo</label>
           <input 
             type="text" 
             id="email" 

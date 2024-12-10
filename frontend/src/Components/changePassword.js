@@ -10,20 +10,27 @@ const ChangePassword = () => {
   const [pass, setPass] = useState("");
   const [newPass, setnewPass] = useState("");
   const [errores, setErrores] = useState("");
+  const token = localStorage.getItem("access_token");
+  const config = {
+      headers: {
+          'Authorization': `Bearer ${token}` // Incluye el token en los encabezados
+      }
+    }
 
-  const validarDatos = async () => {
+  const validarDatos = async (e) => {
+    e.preventDefault()
     setErrores("");
     try {
       const res = await axios.post(apiRoutes.changePassword, {
           "actualPass": pass,
           "newPass": newPass
-      });
+      }, config);
       console.log(res);
       if(res.status === 500){
+        alert('Error al cambiar contrase\xF1a');
         setErrores('Error al cambiar contrase&ntilde;a');
-        localStorage.clear();
-        navigate("/");
       } else{
+        alert('Contrase\xF1a cambiada exitosamente.');
         setTimeout(() =>
         {
           localStorage.clear();
@@ -33,7 +40,8 @@ const ChangePassword = () => {
 
     }
     catch (error) {
-        setErrores('Error al cambiar contraseña, intentar nuevamente');
+        alert('Error al cambiar contrase\xF1a, intentar nuevamente');
+        setErrores('Error al cambiar contrase&ntilde;a, intentar nuevamente');
     }
   }
 

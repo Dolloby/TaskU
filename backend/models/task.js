@@ -20,12 +20,17 @@ const Task = sequelize.define('Task', {
         allowNull: false
     },
     creationDate: {
-        type: DataTypes.DATEONLY,
+        type: DataTypes.DATE,
         allowNull: false,
         unique: true
     },
     expirationDate: {
-        type: DataTypes.DATEONLY,
+        type: DataTypes.DATE,
+        allowNull: false
+    },
+    tag: {
+        type: DataTypes.ENUM('frontend', 'backend', 'fullstack'),
+        defaultValue: 'frontend',
         allowNull: false
     },
     priority: {

@@ -65,14 +65,13 @@ exports.changePassword = async (req, res) => {
 };
 
 exports.updateProfile = async (req, res) => {
-    const { name, lastname, mail, phone, address} = req.body;
+    const { name, lastname, phone, address} = req.body;
     try {
-    //const hashedPass = await bcrypt.hash(pass, 10);
+
     const user = await User.findByPk(req.userId);
     await user.update({
         name,
         lastname,
-        mail,
         phone,
         address
     });
@@ -100,7 +99,7 @@ exports.forgotPassword = async (req, res) => {
             from: process.env.EMAIL_USER,
             to: mail,
             subject: 'Recuperaci\xF3n de Contrase\xF1a',
-            text: `Ha solicitado la recuperaci\xF3n de su cuenta en TaskU!. </ br> Use este enlace para restablecer la contrase\xF1a: http://localhost:3015/api/users/reset-password/${token}`,
+            text: `Ha solicitado la recuperaci\xF3n de su cuenta en TaskU!. Use este enlace para restablecer la contrase\xF1a: http://localhost:3014/reset-password/${token}`,
         });
     
         res.json({ message: 'Correo de recuperaci\u00F3n enviado' });

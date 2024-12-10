@@ -4,8 +4,11 @@ const apiRoutes = {
     profile:`${BASE_URL_API}user/profile/`,
     register: `${BASE_URL_API}user/register`,
     changePassword: `${BASE_URL_API}user/change-password`,
-    logout: `${BASE_URL_API}user/logout`,
+    updateProfile: `${BASE_URL_API}user/update-profile`,
     forgotPassword: `${BASE_URL_API}user/forgot-password`,
+    // resetPassword: `${BASE_URL_API}user/reset-password/:token`,
+    resetPassword: `${BASE_URL_API}user/reset-password`,
+    addTask: `${BASE_URL_API}task/create-task`,
 };
 
 export default apiRoutes;

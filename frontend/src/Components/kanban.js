@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../css/kanban.css';
 
 const Kanban = () => {
@@ -9,8 +10,12 @@ const Kanban = () => {
     { id: 4, title: 'Tarea 3', description: 'Lorem Ipsum', progress: 60, tag: 'Frontend', status: 'Hecho' }
     ]);
 
-    const statuses = ['Para Hacer', 'En Progreso', 'Hecho', "Entregado"];
+    const statuses = ['Para Hacer', 'En Progreso', 'Hecho'];
 
+    const navigate = useNavigate();
+    const createTask = () => {
+        navigate("/create-task");
+    }
     const addCard = () => {
     const newCard = {
         id: tasks.length + 1,
@@ -46,7 +51,7 @@ const Kanban = () => {
             </div>
             ))}
         {status === 'Para Hacer' && (
-            <button className="add-card-button" onClick={addCard}>+ Agregar Tarea</button>
+            <button className="add-card-button" onClick={createTask}>+ Agregar Tarea</button>
         )}
         </div>
     ))}

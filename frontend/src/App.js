@@ -9,8 +9,9 @@ import Recovery from "./Components/recovery";
 import EditProfile from "./Components/editProfile";
 import ChangePassword from "./Components/changePassword";
 import Kanban from "./Components/kanban";
+import CreateTask from './Components/createTask';
+import ResetPassword from "./Components/resetPassword";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import 'react-toastify/dist/ReactToastify.css';
 
 
 function App() {
@@ -24,7 +25,9 @@ function App() {
         <Route path="/profile" element={<PrivateRoute><Profile/> </PrivateRoute>} />
         <Route path="/edit-profile" element={<PrivateRoute><EditProfile/> </PrivateRoute>} />
         <Route path="/change-password" element={<PrivateRoute><ChangePassword/> </PrivateRoute>} />
-        <Route path="/kanban" element={<Kanban/>} />
+        <Route path="/kanban" element={<PrivateRoute><Kanban/> </PrivateRoute>} />
+        <Route path="/create-task" element={<PrivateRoute><CreateTask /> </PrivateRoute>} />
+        <Route path="/reset-password/:token" element={<ResetPassword />} />
       </Routes>
     </Router>
 

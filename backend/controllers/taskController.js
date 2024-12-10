@@ -2,26 +2,30 @@
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const Task = require('../models/task');
+const User = require('../models/user');
 const dayjs = require('dayjs')
 
 // Creación de tarea
 exports.addTask = async (req, res) => {
-    const { title, description, priority, statusTask} = req.body;
+    const { user_id, title, description, tag, priority, statusTask} = req.body;
     try {
+        const user = await User.findByPk(user_id);
         const creationDate = dayjs().format('YYYY-MM-DD HH:mm:ss');
         const expirationDate = dayjs().add(30, 'day').format('YYYY-MM-DD HH:mm:ss'); // Añade un mes a la fecha de creación para expiración de la tarea
 
         const task = await Task.create({
+            user_id,
             title,
             description,
             creationDate,
             expirationDate,
+            tag,
             priority,
             statusTask
         });
         res.status(201).json({ message: 'Tarea creada exitosamente.' });
     } catch (error) {
-        res.status(500).json({ error: 'Error de creación de tarea.' + error});
+        res.status(500).json({ error: 'Error de creaci&oacute;n de tarea.' + error});
     }
 };
 

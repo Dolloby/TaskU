@@ -16,7 +16,14 @@ const Register = () => {
     const [address, setAddress] = useState('');
     const [errores, setErrores] = useState('');
     const navegar = useNavigate();
+    const goback = () => {
+        navegar("/");
+    }
     const validarDatos=async() =>{
+        if(name.trim() === '' || lastName.trim() === '' || email.trim() === '' || password.trim() === '' || phone.trim() === '' || address.trim() === ''){
+            setErrores('Todos los campos son obligatorios.');
+            return false;
+        }
         setErrores('');
         try {
         
@@ -53,7 +60,6 @@ const Register = () => {
             <form>
                 <div className="form-group">
                     <label htmlFor="text">Nombre</label>
-                    <i class="ri-mail-line"></i>
                     <input
                         type="text"
                         id="name"
@@ -63,7 +69,6 @@ const Register = () => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="text">Apellido</label>
-                    <i class="ri-mail-line"></i>
                     <input
                         type="text"
                         id="lastname"
@@ -73,7 +78,6 @@ const Register = () => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="email">Correo Electr&oacute;nico</label>
-                    <i class="ri-mail-line"></i>
                     <input
                         type="email"
                         id="email"
@@ -83,7 +87,6 @@ const Register = () => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="password">Contrase&ntilde;a</label>
-                    <i class="ri-lock-line"></i>
                     <input
                         type="password"
                         id="password"
@@ -93,7 +96,6 @@ const Register = () => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="phone">Telefono</label>
-                    <i class="ri-mail-line"></i>
                     <input
                         type="phone"
                         id="phone"
@@ -103,7 +105,6 @@ const Register = () => {
                 </div>
                 <div className="form-group">
                     <label htmlFor="address">Direccion</label>
-                    <i class="ri-mail-line"></i>
                     <input
                         type="address"
                         id="address"
@@ -114,6 +115,10 @@ const Register = () => {
                 <div className="form-actions">
                     <button type="button" onClick={validarDatos}>
                         Registrarse
+                    </button>
+                    
+                    <button type="button" onClick={goback}>
+                        Volver
                     </button>
                 </div>
             </form>

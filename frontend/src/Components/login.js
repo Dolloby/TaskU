@@ -3,28 +3,29 @@ import axios from 'axios';
 import apiRoutes from './apiRoutes';
 import '../css/login.css';
 import {useNavigate} from "react-router-dom";
-import { useForm } from "react-hook-form";
 
 // Componente para iniciar sesión en la app
-function Login() {
-    const { register, handleSubmit, formState: { errors } } = useForm();
-
+const Login = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     const [errores, setErrores] = useState('');
     const navegar = useNavigate();
 
-    const validarDatos=async(data) =>{
+    const validarDatos=async() =>{
         setErrores('');
         try {
         
         const res=await axios.post(apiRoutes.login, {
-            "mail": data.email,
-            "pass": data.password
+            "mail": email,
+            "pass": password
         });
+
         console.log(res);
         if(res.status === 401){
             setErrores('Acceso denegado, intentar nuevamente');
         }else{
             localStorage.setItem('access_token', res.data.token)
+            // setErrores('Acceso exitoso. Redirigiendo al Dashboard');
             navegar("/dashboard");
         }
 
@@ -41,49 +42,28 @@ function Login() {
                 {errores && <p className="error-message">{errores}</p>}
                 <h2>Bienvenido</h2>
                 <p>Ingresa tus datos para acceder.</p>
-                <form onSubmit={handleSubmit(validarDatos)}>
+                <form>
                     <div className="form-group">
-                        <label >Correo Electr&oacute;nico</label>
+                        <label htmlFor="email">Correo Electr&oacute;nico</label>
                         <input
-                            type="text"
-                            name="email"
-                            // value={email}
-                            // onChange={(e) => setEmail(e.target.value)}
-                            placeholder="Ingresa tu correo" 
-                            { ... register("email", {
-                                required: {
-                                    value: true,
-                                    message: "El campo correo es obligatorio"
-                                },
-                                pattern: {
-                                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
-                                    message: "El formato no es correcto"
-                                }
-                            })}/>
-                        {errors.email && <span>{errors.email.message}</span>}
+                            type="email"
+                            id="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="Ingresa tu correo" />
                     </div>
                     <div className="form-group">
-                        <label>Contrase&ntilde;a</label>
+                        <label htmlFor="password">Contrase&ntilde;a</label>
                         <input
                             type="password"
-                            name="password"
-                            // value={password}
-                            // onChange={(e) => setPassword(e.target.value)}
-                            placeholder="Ingresa tu contrase&ntilde;a" 
-                            {...register("password", {
-                                required: {
-                                        value: true,
-                                        message: "El campo contrase\xF1a es requerido"
-                                    },
-                                    minLength: {
-                                        value: 6,
-                                        message: "La contraseña debe tener al menos 6 caracteres"
-                                    }
-                                })}/>
-                        {errors.password && <span>{errors.password.message}</span>}
+                            id="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Ingresa tu contrase&ntilde;a" />
                     </div>
+                    
                     <div className="form-actions">
-                        <button type="submit" value="submit" onClick={validarDatos}>
+                        <button type="button" onClick={validarDatos}>
                             Iniciar Sesi&oacute;n
                         </button>
                         <div className="links">
