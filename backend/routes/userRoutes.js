@@ -8,7 +8,7 @@ router.post('/login', userController.login);
 router.post('/forgot-password', userController.forgotPassword);
 // router.post('/reset-password/:token', userController.resetPassword);
 router.post('/reset-password', userController.resetPasswordFrontend);
-// Todo lo que conlleve actualizaciones y obtención de información de la base de datos requiere
+// Todo lo que conlleve actualizaciones y obtenciÃ³n de informaciÃ³n de la base de datos requiere
 // el uso de middleware.
 router.post('/change-password', authMiddleware, userController.changePassword);
 router.get('/profile', authMiddleware, userController.getUser);

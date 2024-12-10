@@ -1,4 +1,4 @@
-const BASE_URL_API = "http://localhost:3015/api/"
+const BASE_URL_API = "https://tasku.onrender.com"
 const apiRoutes = {
     login:`${BASE_URL_API}user/login`,
     profile:`${BASE_URL_API}user/profile/`,

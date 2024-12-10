@@ -46,7 +46,7 @@ const Register = () => {
 
         }
         catch (error) {
-            setErrores('Error al registrar Usuario, intentar nuevamente' + error);
+            setErrores('Error al registrar Usuario, intentar nuevamente');
         }
     }
 
