@@ -5,13 +5,13 @@ const Task = require('../models/task');
 const User = require('../models/user');
 const dayjs = require('dayjs')
 
-// Creación de tarea
+// Creaciï¿½n de tarea
 exports.addTask = async (req, res) => {
     const { user_id, title, description, tag, priority, statusTask} = req.body;
     try {
         const user = await User.findByPk(user_id);
         const creationDate = dayjs().format('YYYY-MM-DD HH:mm:ss');
-        const expirationDate = dayjs().add(30, 'day').format('YYYY-MM-DD HH:mm:ss'); // Añade un mes a la fecha de creación para expiración de la tarea
+        const expirationDate = dayjs().add(30, 'day').format('YYYY-MM-DD HH:mm:ss'); // Aï¿½ade un mes a la fecha de creaciï¿½n para expiraciï¿½n de la tarea
 
         const task = await Task.create({
             user_id,
@@ -47,7 +47,7 @@ exports.addTask = async (req, res) => {
 // Obtener datos de la tarea
 exports.filterTask = async (req, res) => {
     try {
-        const task = await Task.findAll({where: {statusTask: 'In Progress'}});
+        const task = await Task.findAll({where: {statusTask: 'todo'}});
         if (!task) return res.status(404).json({ error: 'Tarea no encontrada' });
         res.json(task);
     } catch (error) {

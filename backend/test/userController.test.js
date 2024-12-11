@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs');
 
 describe ('apideusuario', () => {
     let token 
-    const user = {mail: 'alejandro@example.com', pass: 'Clave1234'}
+    const user = {mail: 'kankun30@hotmail.com', pass: 'SegundaClave'}
     const baduser = { mail: 'prueba@example.com', pass: '123456' }
 
     //Prueba de Login
@@ -26,7 +26,7 @@ describe ('apideusuario', () => {
         const newuser = { 
             name: 'Felipe',
             lastname: 'Torres',
-            mail: 'ftorres@example.com',
+            mail: 'ftorres3@example.com',
             pass: '123456',
             phone: '3101234567',
             address: 'Medellin'
@@ -39,7 +39,7 @@ describe ('apideusuario', () => {
         const newbaduser = { 
             name: 'Felipe',
             lastname: 'Torres',
-            mail: 'ftorres@example.com',
+            mail: 'ftorres3@example.com',
             pass: '123456',
             phone: '3101234567',
             address: 'Medellin'
@@ -48,16 +48,16 @@ describe ('apideusuario', () => {
         expect(response.status).toBe(500);
         expect(response.body).toHaveProperty('error', 'Error al registrar usuario');
     });
-    // //Prueba de Actualización de Perfil
-    // test('Actualización de perfil exitosa', async () => {
+    // //Prueba de Actualizaciï¿½n de Perfil
+    // test('Actualizaciï¿½n de perfil exitosa', async () => {
     //     const response = await request(app).patch('/api/user/update-profile').send({...newuser, telefono: '3107894567' }).set('Authorization', `Bearer ${token}`)
     //     expect(response.status).toBe(200)
     //     expect(response.body).toHaveProperty('message', 'Usuario actualizado exitosamente')
     // })
-    // test('Actualización de perfil fallida con datos incorrectos', async () => {
+    // test('Actualizaciï¿½n de perfil fallida con datos incorrectos', async () => {
     //     const response = await request(app).patch('/api/user/update-profile').send({...newuser, telefono: '12345678901' }).set('Authorization', `Bearer ${token}`)
     //     expect(response.status).toBe(400);
-    //     expect(response.body).toHaveProperty('message', 'El teléfono debe tener 10 dígitos');
+    //     expect(response.body).toHaveProperty('message', 'El telï¿½fono debe tener 10 dï¿½gitos');
     // });
 
 })
