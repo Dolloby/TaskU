@@ -19,7 +19,9 @@ app.use(express.json());
  
 // Sincronizar la base de datos
 sequelize.sync();
- 
+
+console.log("Variables de entorno:", process.env);
+
 // Rutas
 
 //Ruta User
