@@ -1,15 +1,16 @@
-const BASE_URL_API = "http://localhost:3015/api/" //local
-// const BASE_URL_API = "https://tasku.onrender.com/api/" //deployment
+const BASE_URL_API = "http://localhost:3015/" 
+const URL = process.env.BASE_URL_API || BASE_URL_API
+// const BASE_URL_API = "https://tasku.onrender.com/" //deployment
 const apiRoutes = {
-    login:`${BASE_URL_API}user/login`,
-    profile:`${BASE_URL_API}user/profile/`,
-    register: `${BASE_URL_API}user/register`,
-    changePassword: `${BASE_URL_API}user/change-password`,
-    updateProfile: `${BASE_URL_API}user/update-profile`,
-    forgotPassword: `${BASE_URL_API}user/forgot-password`,
-    // resetPassword: `${BASE_URL_API}user/reset-password/:token`,
-    resetPassword: `${BASE_URL_API}user/reset-password`,
-    addTask: `${BASE_URL_API}task/create-task`,
+    login:`${URL}user/login`,
+    profile:`${URL}user/profile/`,
+    register: `${URL}user/register`,
+    changePassword: `${URL}user/change-password`,
+    updateProfile: `${URL}user/update-profile`,
+    forgotPassword: `${URL}user/forgot-password`,
+    resetPasswordbackend: `${BASE_URL_API}user/reset-password/:token`,
+    resetPassword: `${URL}user/reset-password`,
+    addTask: `${URL}task/create-task`,
 };
 
 export default apiRoutes;

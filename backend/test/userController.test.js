@@ -48,16 +48,4 @@ describe ('apideusuario', () => {
         expect(response.status).toBe(500);
         expect(response.body).toHaveProperty('error', 'Error al registrar usuario');
     });
-    // //Prueba de Actualizaci�n de Perfil
-    // test('Actualizaci�n de perfil exitosa', async () => {
-    //     const response = await request(app).patch('/api/user/update-profile').send({...newuser, telefono: '3107894567' }).set('Authorization', `Bearer ${token}`)
-    //     expect(response.status).toBe(200)
-    //     expect(response.body).toHaveProperty('message', 'Usuario actualizado exitosamente')
-    // })
-    // test('Actualizaci�n de perfil fallida con datos incorrectos', async () => {
-    //     const response = await request(app).patch('/api/user/update-profile').send({...newuser, telefono: '12345678901' }).set('Authorization', `Bearer ${token}`)
-    //     expect(response.status).toBe(400);
-    //     expect(response.body).toHaveProperty('message', 'El tel�fono debe tener 10 d�gitos');
-    // });
-
 })

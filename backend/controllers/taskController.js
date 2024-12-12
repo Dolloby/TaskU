@@ -5,13 +5,13 @@ const Task = require('../models/task');
 const User = require('../models/user');
 const dayjs = require('dayjs')
 
-// Creaci�n de tarea
+// Creación de tarea
 exports.addTask = async (req, res) => {
     const { user_id, title, description, tag, priority, statusTask} = req.body;
     try {
         const user = await User.findByPk(user_id);
         const creationDate = dayjs().format('YYYY-MM-DD HH:mm:ss');
-        const expirationDate = dayjs().add(30, 'day').format('YYYY-MM-DD HH:mm:ss'); // A�ade un mes a la fecha de creaci�n para expiraci�n de la tarea
+        const expirationDate = dayjs().add(30, 'day').format('YYYY-MM-DD HH:mm:ss'); // A�ade un mes a la fecha de creación para expiración de la tarea
 
         const task = await Task.create({
             user_id,
@@ -62,7 +62,7 @@ exports.modifyState = async (req, res) => {
         await task.update({ statusTask });
         res.status(201).json({ message: 'Tarea actualizada exitosamente' });
         } catch (error) {
-        res.status(500).json({ error: 'Error al actualizae tarea' });
+        res.status(500).json({ error: 'Error al actualizar tarea' });
     }
 };
 
