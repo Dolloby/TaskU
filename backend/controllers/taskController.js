@@ -11,7 +11,7 @@ exports.addTask = async (req, res) => {
     try {
         const user = await User.findByPk(user_id);
         const creationDate = dayjs().format('YYYY-MM-DD HH:mm:ss');
-        const expirationDate = dayjs().add(30, 'day').format('YYYY-MM-DD HH:mm:ss'); // A�ade un mes a la fecha de creación para expiración de la tarea
+        const expirationDate = dayjs().add(30, 'day').format('YYYY-MM-DD HH:mm:ss'); // Añade un mes a la fecha de creación para expiración de la tarea
 
         const task = await Task.create({
             user_id,
@@ -46,9 +46,17 @@ exports.addTask = async (req, res) => {
 
 // Obtener datos de la tarea
 exports.filterTask = async (req, res) => {
+    const { statusTask } = req.params; // Obtener el estado desde los parámetros
+    const validStatuses = ['todo', 'in-progress', 'done'];
+
+    // Validación: Verificar que el estado es válido
+    if (!validStatuses.includes(statusTask)) {
+        return res.status(400).json({ error: 'Estado inválido' });
+    }
+
     try {
-        const task = await Task.findAll({where: {statusTask: 'todo'}});
-        if (!task) return res.status(404).json({ error: 'Tarea no encontrada' });
+        const task = await Task.findAll({where: {statusTask}});
+        if (!task || tasks.length === 0) return res.status(404).json({ error: 'Tarea no encontrada' });
         res.json(task);
     } catch (error) {
         res.status(500).json({ error: 'Error al obtener Tarea' + error});

@@ -10,6 +10,6 @@ module.exports = (req, res, next) => {
     req.taskId = decoded.id;
     next();
   } catch (error) {
-    res.status(400).json({ error: 'Token inv·lido' });
+    res.status(400).json({ error: 'Token inv√°lido' });
   }
 };

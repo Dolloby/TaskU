@@ -6,7 +6,8 @@ const authMiddleware = require('../middleware/auth');
 router.post('/create-task', taskController.addTask);
 // Todo lo que conlleve actualizaciones y obtención de información de la base de datos requiere
 // el uso de middleware.
-router.get('/filter-task', authMiddleware, taskController.filterTask);
+// router.get('/filter-task', authMiddleware, taskController.filterTask);
+router.get('/tasks/status/:statusTask', taskController.filterTask);
 router.post('/modify-state', authMiddleware, taskController.modifyState);
 router.post('/modify-task', authMiddleware, taskController.modifyTask);
 

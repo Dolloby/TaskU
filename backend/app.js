@@ -9,7 +9,7 @@ const taskRoutes = require('./routes/taskRoutes');
 // Configuración de CORS para permitir comunicación con el frontend
 app.use(
     cors({
-        origin: process.env.FRONTEND_URL,
+        origin: process.env.FRONTEND_URL || 'http://localhost:3014',
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
         credentials: true,
     })

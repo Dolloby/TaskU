@@ -1,5 +1,5 @@
 const BASE_URL_API = "http://localhost:3015/" 
-const URL = process.env.BASE_URL_API || BASE_URL_API
+const URL = process.env.BASE_URL_API || "http://localhost:3015/"
 // const BASE_URL_API = "https://tasku.onrender.com/" //deployment
 const apiRoutes = {
     login:`${URL}user/login`,
