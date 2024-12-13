@@ -9,7 +9,7 @@ const sequelize = new Sequelize(
     {
     host: process.env.MYSQL_ADDON_HOST || "localhost", // Cambia el host si tu servidor de base de datos est&aacute; en otro lado
     dialect: process.env.MYSQL_ADDON_DIALECT || "mysql", // Cambia el
-    port: process.env.MYSQL_ADDON_PORT || "3301", //
+    port: process.env.MYSQL_ADDON_PORT || "3306", //
     logging: false, // Desactiva el log de consultas si prefieres que no se vean en la consola
 
 });
