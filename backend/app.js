@@ -10,8 +10,8 @@ const taskRoutes = require('./routes/taskRoutes');
 // Configuración de CORS para permitir comunicación con el frontend
 app.use(
     cors({
-        // origin: 'https://task-u.vercel.app',
-        origin: process.env.REACT_APP_API_URL,
+        origin: 'https://task-u.vercel.app',
+        // origin: process.env.REACT_APP_API_URL,
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
         credentials: true,
     })
