@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import apiRoutes from "./apiRoutes";
 import '../css/changePassword.css';
 import axios from "axios";
+import Button from 'react-bootstrap/Button';
 
 const ChangePassword = () => {
   const navigate = useNavigate();
@@ -27,10 +28,10 @@ const ChangePassword = () => {
       }, config);
       console.log(res);
       if(res.status === 500){
-        alert('Error al cambiar contrase\xF1a');
+        alert('Error al cambiar contraseña');
         setErrores('Error al cambiar contrase&ntilde;a');
       } else{
-        alert('Contrase\xF1a cambiada exitosamente.');
+        alert('Contraseña cambiada exitosamente.');
         setTimeout(() =>
         {
           localStorage.clear();
@@ -40,7 +41,7 @@ const ChangePassword = () => {
 
     }
     catch (error) {
-        alert('Error al cambiar contrase\xF1a, intentar nuevamente');
+        alert('Error al cambiar contraseña, intentar nuevamente');
         setErrores('Error al cambiar contrase&ntilde;a, intentar nuevamente');
     }
   }
@@ -67,7 +68,7 @@ const ChangePassword = () => {
           <div classname="underline"></div>
         </div>
 
-        <button className="chgpass-submit-btn" type="submit" onClick={validarDatos}>Enviar</button>
+        <Button className="chgpass-submit-btn" variant="success" type="submit" onClick={validarDatos}>Enviar</Button>
       </form>
     </div>
   );

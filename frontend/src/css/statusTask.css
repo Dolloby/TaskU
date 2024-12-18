@@ -1,14 +1,80 @@
+/* StatusTask.css */
 .status-task {
     flex: 1;
     background-color: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
-    padding: 10px;
+    padding: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.status-task h2 {
-    margin: 0 0 10px;
-    text-align: center;
-    font-size: 18px;
+.status-task h3 {
+    /* text-align: left; */
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.task-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.task-card {
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 15px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.task-card:hover {
+    transform: scale(1.02);
+}
+
+.task-card h3 {
+    margin: 0;
+    color: #333;
+    font-size: 16px;
+}
+
+.task-card .tag {
+    padding: 5px 10px;
+    border-radius: 8px;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+.task-card p {
+    margin: 10px 0;
+    color: #666;
+    font-size: 14px;
+}
+
+.task-card small {
+    display: block;
+    margin-top: 10px;
+    color: #999;
+    font-size: 0.8rem;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.card-footer small {
+    font-size: 12px;
+    color: #666;
+}
+
+.card-footer .btn {
+    font-size: 12px;
+    padding: 4px 8px;
 }

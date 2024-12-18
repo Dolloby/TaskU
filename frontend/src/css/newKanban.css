@@ -1,6 +1,22 @@
+/* Kanban.css */
+.kanban-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
 .kanban-container {
     display: flex;
     gap: 20px;
     padding: 20px;
     background-color: #f4f4f4;
+    min-height: 100vh;
+    max-width: 80%;
+}
+
+.error {
+    color: red;
+    font-size: 1.2rem;
+    text-align: center;
+    margin-top: 20px;
 }

@@ -5,11 +5,13 @@ const app = express();
 const sequelize = require('./config/database');
 const userRoutes = require('./routes/userRoutes');
 const taskRoutes = require('./routes/taskRoutes');
+//const middleware = require('../backend/middleware/auth');
 
 // Configuración de CORS para permitir comunicación con el frontend
 app.use(
     cors({
-        origin: 'https://task-u.vercel.app',// || 'http://localhost:3014',
+        // origin: 'https://task-u.vercel.app',
+        origin: process.env.REACT_APP_API_URL,
         methods: ['GET', 'POST', 'PUT', 'DELETE'],
         credentials: true,
     })
@@ -24,5 +26,7 @@ sequelize.sync();
 app.use('/user', userRoutes);
 //Ruta Task
 app.use('/task', taskRoutes);
+
+//app.use(middleware);
 
 module.exports = app;

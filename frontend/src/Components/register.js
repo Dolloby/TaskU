@@ -40,8 +40,9 @@ const Register = () => {
         }else{
             setTimeout(() =>
             {
+                alert("Registro exitoso. Redirigiendo al inicio para logueo.");
                 navegar("/");
-            }, 3000);
+            }, 1000);
         }
 
         }

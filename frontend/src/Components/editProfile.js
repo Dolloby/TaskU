@@ -31,13 +31,13 @@ const EditProfile = () => {
     }, config);
     console.log(res);
     if(res.status === 500){
-      alert('Error al actualizar información');
+      alert('Error al actualizar informaciÃ³n');
       setErrores('Error al editar el perfil del usuario');
     } else if(res.status === 404){
       alert('Endpoint no encontrado. Verifica el backend.');
       setErrores('Error al editar el perfil del usuario');
     } else{
-      alert('Información actualizada exitosamente.');
+      alert('InformaciÃ³n actualizada exitosamente.');
       setTimeout(() =>
       {
           navegar("/profile");
@@ -88,7 +88,7 @@ const EditProfile = () => {
                   onChange={(e) => setAddress(e.target.value)}
                   value={address}/>
               </div>
-          <Button className="submit" onClick={validarDatos}>Guardar</Button>
+          <Button className="submit" variant="success" onClick={validarDatos}>Guardar</Button>
         </form>
       </div>
     </div>

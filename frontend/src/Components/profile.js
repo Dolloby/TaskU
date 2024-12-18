@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import {useNavigate} from "react-router-dom";
 import '../css/profile.css';
 import apiRoutes from "./apiRoutes";
 import { Button, Modal } from "react-bootstrap";
+import HeaderApp from './headerApp';
 import ChangePassword from "./changePassword";
 import UpdateProfile from "./editProfile";
 
@@ -12,15 +12,6 @@ const Profile = () => {
     const [showUpdateProfile, setShowUpdateProfile] = useState(false);
     const [errores, setErrores] = useState('');
     const [user, setUser] = useState(null);
-    const navegar = useNavigate();
-    const navigate = useNavigate();
-    const dashboard = () => {
-        navigate("/dashboard"); 
-    }
-    const logout = () => {
-        localStorage.clear();
-        navegar("/"); 
-    }
 
     useEffect(
         () => {
@@ -47,27 +38,9 @@ const Profile = () => {
     
     return (
         <div className="profile-container">
-            <header className="profile-header">
-                <div className="profile-logo">TaskU!</div>
-                {/* <div className="search-bar">
-                    <input type="text" autocomplete="off" name="text" className="input" placeholder="Buscar Tareas"></input>
-                </div> */}
-                <div className="profile-group">
-                    <svg viewBox="0 0 24 24" aria-hidden="true" class="icon">
-                        <g>
-                        <path
-                            d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"
-                        ></path>
-                        </g>
-                    </svg>
-                    <input className="profile-input" type="search" placeholder="Search" />
-                </div>
-                <nav className="nav">
-                    <a href="/dashboard"className='link' onClick={dashboard}>Tablero</a>
-                    <a href="/profile" className='link'>Mi Perfil</a>
-                    <a href="/" className='link' onClick={logout}>Salir</a>
-                </nav>
-            </header>
+            <div className="">
+                <HeaderApp />
+            </div>
             <div className="profile-modals">
                 {/* Modal para cambiar contraseña */}
                 <Modal size="sm" show={showChangePassword} onHide={() => setShowChangePassword(false)} centered>
@@ -121,10 +94,10 @@ const Profile = () => {
                 )}
                 <div className="profile-buttons">
                     <div className="profile-actions">
-                        <Button className="me-2" onClick={() => setShowChangePassword(true)}>
+                        <Button className="me-2" variant="success" onClick={() => setShowChangePassword(true)}>
                             Cambiar Contrase&ntilde;a
                         </Button>
-                        <Button className="me-2" onClick={() => setShowUpdateProfile(true)}>
+                        <Button className="me-2" variant="success" onClick={() => setShowUpdateProfile(true)}>
                             Actualizar Perfil
                         </Button>
                     </div>

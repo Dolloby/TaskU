@@ -1,25 +1,44 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
-
+import CreateTask from "./createTask";
+import { Button, Modal } from "react-bootstrap";
+import { useState } from "react";
+import '../css/sidebar.css';
 
 const Sidebar = () => {
+    const [showAddTask, setShowAddTask] = useState(false);
 
-    const navegar = useNavigate();
-    const logout = () => {
-        localStorage.clear();
-        navegar("/"); 
-    }
     return (
-        <div className="profile-sidebar">
-                    <h3>AppPedidos</h3>
-                    <ul>
-                        <li><a href="/dashboard">Dashboard</a></li>
-                        <li><a href="/profile">Perfil</a></li>
-                        <li><a href="/orders">Pedidos</a></li>
-                        <li><a href="/board">Tablero</a></li>
-                        <li><a href="/dashboard" onClick={logout}>Salir</a></li>
-                    </ul>
+        <div className="sidebar-container">
+            <Modal size="lg" show={showAddTask} onHide={() => setShowAddTask(false)} centered>
+                <Modal.Body>
+                    <div className="modal-centered">
+                        <CreateTask onClose={() => setShowAddTask(false)} />
+                    </div>
+                </Modal.Body>
+            </Modal>
+            <div className="sidebar-column">
+                <div className="sidebar-button">
+                    <Button className="me-2" variant="success" onClick={() => setShowAddTask(true)}>
+                        Crear Tarea
+                    </Button>
+                </div>
+
+                <div className="sidebar-controls">
+                    <h3>Estado</h3>
+                    <Button variant="outline-dark" size="sm">Por Hacer</Button>
+                    <Button variant="outline-dark" size="sm">En progreso</Button>
+                    <Button variant="outline-dark" size="sm">Hecho</Button>
+                </div>
+                <div className="sidebar-controls">
+                    <h3>Etiquetas</h3>
+                    <Button variant="outline-dark" size="sm">Backend</Button>
+                    <Button variant="outline-dark" size="sm">Frontend</Button>
+                    <Button variant="outline-dark" size="sm">FullStack</Button>
+                </div>
+            </div>
+            
         </div>
+        
     );
 }
 

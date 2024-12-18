@@ -98,8 +98,8 @@ exports.forgotPassword = async (req, res) => {
         await transporter.sendMail({
             from: process.env.EMAIL_USER,
             to: mail,
-            subject: 'Recuperaci\xF3n de Contrase\xF1a',
-            text: `Ha solicitado la recuperaci\xF3n de su cuenta en TaskU!. Use este enlace para restablecer la contrase\xF1a: http://localhost:3014/reset-password/${token}`,
+            subject: 'Recuperaci\u00F3n de Contrase\u00F1a',
+            text: `Ha solicitado la recuperaci\u00F3n de su cuenta en TaskU!. Use este enlace para restablecer la contrase\u00F1a: https://task-u.vercel.app/reset-password/${token}`,
         });
     
         res.json({ message: 'Correo de recuperaci\u00F3n enviado' });

@@ -50,6 +50,6 @@ const Task = sequelize.define('Task', {
 
 // Relación con Usuario y Habitacion
 Task.belongsTo(User, { foreignKey: 'user_id', as: 'user' });
-User.hasMany(Task, { foreignKey: 'user_id', as: 'tasks' });
+User.hasMany(Task, { foreignKey: 'user_id', as: 'task' });
 
 module.exports = Task;

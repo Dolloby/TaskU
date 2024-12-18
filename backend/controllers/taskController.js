@@ -25,68 +25,65 @@ exports.addTask = async (req, res) => {
         });
         res.status(201).json({ message: 'Tarea creada exitosamente.' });
     } catch (error) {
-        res.status(500).json({ error: 'Error de creaci&oacute;n de tarea.' + error});
+        res.status(500).json({ error: 'Error de creaci&oacute;n de tarea.' + ' ' + error});
     }
 };
-
-// // Login de usuario
-// exports.login = async (req, res) => {
-//     const { mail, pass } = req.body;
-//     try {
-//         const user = await User.findOne({ where: { mail } });
-//         if (!user || !(await bcrypt.compare(pass, user.pass))) {
-//         return res.status(401).json({ error: 'Credenciales incorrectas' });
-//         }
-//         const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, { expiresIn: '1h' });
-//         res.json({ message: 'Login exitoso', token });
-//     } catch (error) {
-//         res.status(500).json({ error: 'Error en el login' });
-//     }
-// };
 
 // Obtener datos de la tarea
 exports.filterTask = async (req, res) => {
     const { statusTask } = req.params; // Obtener el estado desde los parámetros
-    const validStatuses = ['todo', 'in-progress', 'done'];
-
-    // Validación: Verificar que el estado es válido
-    if (!validStatuses.includes(statusTask)) {
-        return res.status(400).json({ error: 'Estado inválido' });
-    }
+    const userId = req.userId;
 
     try {
-        const task = await Task.findAll({where: {statusTask}});
-        if (!task || tasks.length === 0) return res.status(404).json({ error: 'Tarea no encontrada' });
-        res.json(task);
+        const tasks = await Task.findAll({ 
+            where: { statusTask, user_id: userId },
+            attributes: ['id', 'title', 'statusTask', 'description', 'expirationDate', 'tag', 'priority'],
+        });
+        if (!tasks || tasks.length === 0) {
+            return res.status(404).json({ error: 'No se encontraron tareas' });
+        }
+        res.json(tasks);
     } catch (error) {
-        res.status(500).json({ error: 'Error al obtener Tarea' + error});
+        res.status(500).json({ error: 'Error al obtener tareas: ' + error.message });
     }
 };
 
-exports.modifyState = async (req, res) => {
-    const { statusTask } = req.body;
+exports.updateTask= async (req, res) => {
+    const { title, description, tag, priority, statusTask} = req.body;
+    const { id } = req.params;
     try {
-        const task = await Task.findByPk(req.taskId);
-        await task.update({ statusTask });
-        res.status(201).json({ message: 'Tarea actualizada exitosamente' });
-        } catch (error) {
-        res.status(500).json({ error: 'Error al actualizar tarea' });
+    const task = await Task.findByPk(id);
+    if (!task) {
+        return res.status(404).json({ error: 'Tarea no encontrada' });
     }
-};
-
-exports.modifyTask = async (req, res) => {
-    const { title, description, expirationDate, priority} = req.body;
-    try {
-    //const hashedPass = await bcrypt.hash(pass, 10);
-    const task = await Task.findByPk(req.taskId);
     await task.update({
         title,
         description,
-        expirationDate,
-        priority
+        tag,
+        priority,
+        statusTask
     });
     res.status(201).json({ message: 'Tarea actualizada exitosamente' });
     } catch (error) {
-        res.status(500).json({ error: 'Error al actualizar tarea ' + error });
+        res.status(500).json({ error: 'Error al actualizar tarea ' + error.message });
+    }
+
+};
+
+exports.deleteTask = async (req, res) => {
+    const { id } = req.params; // Captura el ID de la tarea desde los parámetros
+
+    try {
+        const deletedTask = await Task.destroy({
+            where: { id }
+        });
+
+        if (!deletedTask) {
+            return res.status(404).json({ message: "Tarea no encontrada" });
+        }
+
+        res.status(200).json({ message: "Tarea eliminada exitosamente" });
+    } catch (error) {
+        res.status(500).json({ message: "Error al eliminar la tarea", error: error.message });
     }
 };

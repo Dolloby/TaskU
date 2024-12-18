@@ -1,7 +1,6 @@
 /* Configuraci&oacute;n b&aacute;sica */
 body {
   font-family: Arial, sans-serif;
-  background-color: #7f56d94b;
   margin: 0;
   padding: 0;
   display: flex;
@@ -84,7 +83,7 @@ body {
 
 .form-actions button {
   width: 100%;
-  background-color: #7f56d9;
+  background-color: #404040;
   color: #fff;
   padding: 10px;
   border: none;
@@ -94,7 +93,7 @@ body {
 }
 
 .form-actions button:hover {
-  background-color: #6941c6;
+  background-color: #485359;
 }
 
 .links {
@@ -113,7 +112,7 @@ body {
   text-decoration: underline;
 }
 
-/* Sección de la imagen */
+/* Secciï¿½n de la imagen */
 .login-right {
   flex: 1;
   display: flex;

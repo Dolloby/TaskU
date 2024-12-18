@@ -4,7 +4,7 @@ import apiRoutes from './apiRoutes';
 import '../css/login.css';
 import {useNavigate} from "react-router-dom";
 
-// Componente para iniciar sesión en la app
+// Componente para iniciar sesiÃ³n en la app
 const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
