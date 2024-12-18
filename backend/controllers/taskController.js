@@ -40,7 +40,7 @@ exports.filterTask = async (req, res) => {
             attributes: ['id', 'title', 'statusTask', 'description', 'expirationDate', 'tag', 'priority'],
         });
         if (!tasks || tasks.length === 0) {
-            return res.status(404).json({ error: 'No se encontraron tareas' });
+            return res.status(200).json([]);
         }
         res.json(tasks);
     } catch (error) {

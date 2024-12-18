@@ -35,7 +35,11 @@ const NewKanban = () => {
 
             setTasksByStatus(tasksByStatus);
         } catch (err) {
+            if (err.response && err.response.status === 404) {
+                return [];
+            }else {
             setError("Error al cargar las tareas.");
+            }
         } finally {
             setLoading(false);
         }
