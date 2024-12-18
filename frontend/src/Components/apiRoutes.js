@@ -6,7 +6,7 @@ const apiRoutes = {
     register: `${URL}user/register`,
     changePassword: `${URL}user/change-password`,
     updateProfile: `${URL}user/update-profile`,
-    forgotPassword: `${URL}user/forgot-password`,
+    forgotPassword: `${URL}/user/forgot-password`,
     resetPasswordbackend: `${URL}user/reset-password/:token`,
     resetPassword: `${URL}user/reset-password`,
     addTask: `${URL}task/create-task`,
